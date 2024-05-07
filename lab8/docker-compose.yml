@@ -1,0 +1,26 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init-sql/:/docker-entrypoint-initdb.d
+    restart: always
+    ports:
+      - "33061:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: jkqwheIYWQ123khb8
+      MYSQL_DATABASE: software-testing
+      MYSQL_USER: software-testing
+      MYSQL_PASSWORD: 'pAsw0rd_kw123'
+
+volumes:
+  mysql-data:
